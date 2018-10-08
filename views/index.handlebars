@@ -1,0 +1,70 @@
+<!-- {{#each burgers}}
+  {{this.id}}<br>
+  {{this.burger_name}}<br>
+  {{this.devoured}}<br>
+  {{this.timestamp}}
+{{/each}} -->
+
+
+<div class="addBurger">
+  <h2>Add a Burger!</h2>
+  <div class="container">
+    <form action="/" method="POST">
+      <div class="form-group row align-items-center">
+        <label for="inputEmail3" class="col-sm-2 col-form-label"><strong>Burger Name</strong></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" name="burgerName" id="burgerName" placeholder="e.g. Bacon Max Deluxe" required>
+        </div>
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary">ADD IT!</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> <!-- addBurger -->
+
+<div class="burgers row">
+
+  <div class="col-sm-12 col-md-6 toBeEaten">
+    <h2>Ready to Eat!</h2>
+    <!-- list of burgers not yet eaten -->
+    {{#each burgers}}
+    {{#unless devoured}}
+    <div class="burger row">
+      <div class="col-6">
+        <span class="h4" id="ready{{id}}">{{burger_name}}</span>
+      </div>
+      <div class="col-6">
+        <form action="/?_method=PUT" method="POST">
+          <button class="btn btn-success btn-sm">EAT IT!</button>
+          <input type="hidden" name="id" value="{{id}}">
+        </form>
+      </div>
+    </div> <!-- burger -->
+    {{/unless}}
+    {{/each}}
+
+  </div> <!-- toBeEaten -->
+
+  <div class="col-sm-12 col-md-6 eaten">
+    <h2>Already Eaten</h2>
+    <!-- list of burgers already eaten -->
+    {{#each burgers}}
+    {{#if devoured}}
+    <div class="burger row">
+      <div class="col-6">
+        <span class="h4" id="eaten{{id}}">{{burger_name}}</span>
+      </div>
+      <div class="col-6">
+        <form action="/?_method=DELETE" method="POST">
+          <button class="btn btn-danger btn-sm">DELETE IT!</button>
+          <input type="hidden" name="deleteId" value="{{id}}">
+        </form>
+      </div>
+    </div> <!-- burger -->
+    {{/if}}
+    {{/each}}
+
+  </div> <!-- eaten -->
+
+</div> <!-- burgers -->
