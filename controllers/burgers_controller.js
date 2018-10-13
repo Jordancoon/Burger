@@ -14,11 +14,6 @@ router.get("/", function(req, res) {
   });
 });
 
-// Stupid favicons...
-router.get('/favicon.ico', function(req, res) {
-    res.status(204);
-});
-
 router.post("/", function(req, res) {
   console.log(req.body.burgerName);
   burger.insertOne(
